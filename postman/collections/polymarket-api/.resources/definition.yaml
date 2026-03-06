@@ -1,0 +1,21 @@
+$kind: collection
+name: Polymarket API
+description: |-
+  A production-ready Postman collection for the Polymarket API.
+  
+  ## APIs Used
+  - Gamma API: https://gamma-api.polymarket.com (markets data)
+  - CLOB API: https://clob.polymarket.com (order book)
+variables:
+  - key: baseUrl
+    value: 'https://gamma-api.polymarket.com'
+    description: Base URL for Gamma API (markets endpoints)
+  - key: clobBaseUrl
+    value: 'https://clob.polymarket.com'
+    description: Base URL for CLOB API (order book)
+  - key: tokenId
+    value: ''
+    description: Token ID for order book queries
+  - key: category
+    value: 'politics'
+    description: Category filter for markets

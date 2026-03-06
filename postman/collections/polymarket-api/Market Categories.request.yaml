@@ -1,0 +1,29 @@
+$kind: http-request
+name: Market Categories
+method: GET
+url: '{{baseUrl}}/markets'
+order: 3000
+queryParams:
+  - key: category
+    value: '{{category}}'
+    description: Filter markets by category (e.g., politics, sports, crypto)
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 200", function () {
+          pm.response.to.have.status(200);
+      });
+
+      pm.test("Response is JSON", function () {
+          pm.response.to.be.json;
+      });
+
+      pm.test("Response is an array of markets in category", function () {
+          const jsonData = pm.response.json();
+          pm.expect(jsonData).to.be.an('array');
+          if (jsonData.length > 0) {
+              pm.expect(jsonData[0]).to.have.property('id');
+              pm.expect(jsonData[0]).to.have.property('question');
+          }
+      });

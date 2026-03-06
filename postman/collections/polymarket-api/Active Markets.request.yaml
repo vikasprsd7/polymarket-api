@@ -1,0 +1,32 @@
+$kind: http-request
+name: Active Markets
+method: GET
+url: '{{baseUrl}}/markets'
+order: 1000
+queryParams:
+  - key: active
+    value: 'true'
+    description: Filter for active markets
+  - key: closed
+    value: 'false'
+    description: Exclude closed markets
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 200", function () {
+          pm.response.to.have.status(200);
+      });
+
+      pm.test("Response is JSON", function () {
+          pm.response.to.be.json;
+      });
+
+      pm.test("Response is an array of markets", function () {
+          const jsonData = pm.response.json();
+          pm.expect(jsonData).to.be.an('array');
+          if (jsonData.length > 0) {
+              pm.expect(jsonData[0]).to.have.property('id');
+              pm.expect(jsonData[0]).to.have.property('question');
+          }
+      });
