@@ -17,4 +17,3 @@ A production-ready Postman collection for the Polymarket API.
 ## APIs Used
 - Gamma API: `https://gamma-api.polymarket.com`
 - CLOB API: `https://clob.polymarket.com`
-EOF
